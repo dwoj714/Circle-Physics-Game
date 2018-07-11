@@ -50,7 +50,8 @@ public abstract class HealthBarObject : MonoBehaviour {
 	
 	public void takeDamage(float dmg)
 	{
-		if(shield > 0)
+
+		if (shield > 0)
 		{
 			counter = 0;
 			shield -= dmg;

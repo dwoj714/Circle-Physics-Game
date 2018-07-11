@@ -3,26 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoreScript : HealthBarObject {
-
-	CircleCollider2D col;
-
-	public Detonator burner;
-
-	// Use this for initialization
-	protected override void Start ()
-	{
-		base.Start();
-		col = GetComponent<CircleCollider2D>();
-	}
-
+//Don't have anything for this yet, but the filename CoreScript is pretty cool
+public class CoreScript : HealthBarObject
+{
 	public override void die()
 	{
 		throw new NotImplementedException();
-	}
-
-	void FixedUpdate()
-	{
-		burner.explode();
 	}
 }

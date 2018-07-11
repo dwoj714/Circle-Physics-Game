@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour
 	Vector2 mouseHolder0, mouseHolder1;
 
 	//Holds the location of the mouse while holding respective mouse buttons
-	Vector2 mouseDrag0, mouseDrag1;
+	[HideInInspector]
+	public Vector2 mouseDrag0, mouseDrag1;
 
 	ProjectileHandler weapon;
 
@@ -28,7 +29,6 @@ public class PlayerController : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		col = GetComponent<CircleCollider2D>();
-		//force = Vector2.zero;
 		weapon = GetComponent<ProjectileHandler>();
 	}
 	
@@ -44,19 +44,6 @@ public class PlayerController : MonoBehaviour
 			Time.timeScale = 1;
 		}
 
-
-
-		if (Input.GetMouseButtonUp(0))
-		{
-			float speed = mouseDrag0.magnitude / maxMagnitude * (maxSpeed - minSpeed) + minSpeed;
-			rb.velocity = mouseDrag0.normalized * speed;
-		}
-		if (Input.GetMouseButtonUp(1))
-		{
-			weapon.fire(mouseDrag1, mouseDrag1.magnitude / maxMagnitude);
-		}
-
-
 		//Store the position of the mouse when initiating a mouse drag
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -67,23 +54,29 @@ public class PlayerController : MonoBehaviour
 			mouseHolder1 = Input.mousePosition;
 		}
 
-
+		//Retrieve the position of the mouse while dragging, draw a ray showing the drag
 		if (Input.GetMouseButton(0))
 		{
 			mouseDrag0 = Vector2.ClampMagnitude(((Vector2)Input.mousePosition - mouseHolder0) / -5, maxMagnitude);
 			Debug.DrawRay(transform.position, mouseDrag0, Color.green);
 		}
-
 		if (Input.GetMouseButton(1))
 		{
 			mouseDrag1 = Vector2.ClampMagnitude(((Vector2)Input.mousePosition - mouseHolder1) / -5, maxMagnitude);
 			Debug.DrawRay(transform.position, mouseDrag1, Color.red);
 		}
+
+		//On mouse release, move the player or fire projectiles
+		if (Input.GetMouseButtonUp(0))
+		{
+			float speed = mouseDrag0.magnitude / maxMagnitude * (maxSpeed - minSpeed) + minSpeed;
+			rb.velocity = mouseDrag0.normalized * speed;
+			mouseDrag0 = Vector2.zero;
+		}
+		if (Input.GetMouseButtonUp(1))
+		{
+			weapon.fire(mouseDrag1, mouseDrag1.magnitude / maxMagnitude);
+			mouseDrag1 = Vector2.zero;
+		}
 	}
-
-	void FixedUpdate()
-	{
-
-	}
-
 }

@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class CameraFollow1D : MonoBehaviour {
 
-	Rigidbody2D followRB;
-
-	//public bool vertical = true;
-
 	public float upperBound;
 	public float lowerBound;
 
 	public float pushRange;
 
-	private float zPosition;
+	float zPosition;
+
+	float offsetY;
+
+	PlayerController player;
+	Rigidbody2D rb;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
-		followRB = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+		player = GameObject.Find("Player").GetComponent<PlayerController>();
+		rb = player.GetComponent<Rigidbody2D>();
 		zPosition = transform.position.z;
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
-		transform.position = Vector3.up * Mathf.Clamp(followRB.position.y, lowerBound, upperBound) + Vector3.forward * zPosition;
+		if (Mathf.Abs(transform.position.y - player.transform.position.y) > pushRange)
+		{
+			float yCoord = player.transform.position.y + pushRange * (player.transform.position.y > transform.position.y ? -1 : 1);
+			transform.position = Vector3.up * Mathf.Clamp(yCoord, lowerBound, upperBound) + Vector3.forward * zPosition;
+		}
 	}
 
 

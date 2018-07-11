@@ -13,9 +13,9 @@ public class FuseBomb : Projectile {
 		detonator = GetComponent<Detonator>();
 	}
 
-	protected override void Start()
+	protected void Start()
 	{
-		base.Start();
+		//base.Start();
 		detonator.sparked = true;
 	}
 

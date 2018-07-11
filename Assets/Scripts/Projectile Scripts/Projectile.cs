@@ -5,9 +5,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent (typeof(CircleCollider2D))]
-public class Projectile : MonoBehaviour {
-
-	public bool affectedByExplosions;
+public class Projectile : MonoBehaviour
+{
 	public bool hasFixedSpeed;
 
 	//Used as the initial magnitude of velocity
@@ -33,12 +32,6 @@ public class Projectile : MonoBehaviour {
 		col = GetComponent<CircleCollider2D>();
 	}
 
-	protected virtual void Start()
-	{
-		col.isTrigger = true;
-		//if(owner.layer == )
-	}
-
 	protected virtual void FixedUpdate()
 	{
 		if (hasFixedSpeed)
@@ -47,14 +40,17 @@ public class Projectile : MonoBehaviour {
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision)
 	{
+		Debug.Log(collision.collider.name);
 		HealthBarObject target = collision.collider.GetComponent<HealthBarObject>();
-		if(target)
+		if (target)
+		{
 			target.takeDamage(impactDMG);
+		}
 
 		GameObject.Destroy(this.gameObject);
 	}
 
-	//Yiu were using these to have the projectile start at the center of the player and smoothly move out
+	/*You were using these to have the projectile start at the center of the player as a trigger and smoothly move out
 	void OnTriggerExit2D(Collider2D col)
 	{
 		//Debug.Log(col.gameObject.name);
@@ -70,5 +66,5 @@ public class Projectile : MonoBehaviour {
 		{
 			this.col.isTrigger = false;
 		}
-	}
+	}*/
 }
