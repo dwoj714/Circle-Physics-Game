@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent (typeof(CircleCollider2D))]
-public class Projectile : MonoBehaviour
+public class Projectile : PhysCircle
 {
 	public bool hasFixedSpeed;
 
@@ -19,17 +19,14 @@ public class Projectile : MonoBehaviour
 
 	public float impactDMG;
 
-	public Rigidbody2D rb;
-	public CircleCollider2D col;
-
 	[HideInInspector]
 	//The GameObject that fired the projectile
 	public GameObject owner;
 
-	protected virtual void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		rb = GetComponent<Rigidbody2D>();
-		col = GetComponent<CircleCollider2D>();
 	}
 
 	protected virtual void FixedUpdate()
@@ -38,10 +35,9 @@ public class Projectile : MonoBehaviour
 			rb.velocity = rb.velocity.normalized * speed;
 	}
 
-	protected virtual void OnCollisionEnter2D(Collision2D collision)
+	protected override void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log(collision.collider.name);
-		HealthBarObject target = collision.collider.GetComponent<HealthBarObject>();
+		HealthBar target = collision.collider.GetComponent<HealthBar>();
 		if (target)
 		{
 			target.takeDamage(impactDMG);

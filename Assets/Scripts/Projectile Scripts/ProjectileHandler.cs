@@ -6,7 +6,6 @@ public class ProjectileHandler : MonoBehaviour
 {
 	CircleCollider2D col;
 
-
 	public Projectile ammoType;
 
 	//If the magnitude of direction is less than this, don't fire
@@ -21,7 +20,7 @@ public class ProjectileHandler : MonoBehaviour
 	{
 		direction.Normalize();
 
-		if(power > deadZone)
+		if(power >= deadZone)
 		{
 			float speedRange = ammoType.maxSpeed - ammoType.minSpeed;
 			float speed = ammoType.minSpeed + speedRange * power;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Detonator))]
-public class FuseBomb : Projectile {
-
+public class ImpactBomb : Projectile
+{
 	[HideInInspector]
 	public Detonator detonator;
 
@@ -14,13 +14,7 @@ public class FuseBomb : Projectile {
 		detonator = GetComponent<Detonator>();
 	}
 
-	protected void Start()
-	{
-		//base.Start();
-		detonator.sparked = true;
-	}
-
-	//Same as the base collision code, without destroying the projectile
+	//On collision, deal impact damage and spark the detonator
 	protected override void OnCollisionEnter2D(Collision2D collision)
 	{
 		HealthBar target = collision.collider.GetComponent<HealthBar>();
@@ -28,6 +22,7 @@ public class FuseBomb : Projectile {
 		{
 			target.takeDamage(impactDMG);
 		}
+		detonator.sparked = true;
 	}
 
 	void OnExplosion()

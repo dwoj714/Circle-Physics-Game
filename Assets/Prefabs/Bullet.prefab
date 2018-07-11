@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58229496597604380}
   - component: {fileID: 50671068572207634}
   - component: {fileID: 212688329440395280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1999387636963584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4228241, y: -1.9424187, z: -0.07155191}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 8
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -77,7 +77,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.5
 --- !u!114 &114999437381299090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,14 +89,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce81e398b93e3cc479bf3dea308daf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedByExplosions: 0
+  col: {fileID: 58229496597604380}
+  rb: {fileID: 50671068572207634}
   hasFixedSpeed: 1
   speed: 5
   minSpeed: 15
   maxSpeed: 35
-  impactDMG: 75
-  rb: {fileID: 50671068572207634}
-  col: {fileID: 58229496597604380}
+  impactDMG: 33.4
   owner: {fileID: 0}
 --- !u!212 &212688329440395280
 SpriteRenderer:
@@ -132,7 +131,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: f0f847a06ef2fca4abdb5d4cb54762c7, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

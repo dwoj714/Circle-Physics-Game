@@ -8,7 +8,7 @@ public class Burner : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		HealthBarObject hb = col.GetComponent<HealthBarObject>();
+		HealthBar hb = col.GetComponent<HealthBar>();
 		if(hb)
 		{
 			hb.takeDamage(DPS * Time.deltaTime);

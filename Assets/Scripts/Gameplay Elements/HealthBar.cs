@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class HealthBarObject : MonoBehaviour {
+public class HealthBar : MonoBehaviour {
 
 	private float lateDamage;
 
@@ -70,7 +70,7 @@ public abstract class HealthBarObject : MonoBehaviour {
 			if (health < 1)
 			{
 				health = 0;
-				die();
+				SendMessage("onHealthDeplete");
 			}
 		}
 	}
@@ -110,6 +110,4 @@ public abstract class HealthBarObject : MonoBehaviour {
 	{
 		return shield;
 	}
-
-	public abstract void die();
 }

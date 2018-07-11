@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour {
+public class HealthBarVisualizer : MonoBehaviour {
 
-	public HealthBarObject source;
+	HealthBar source;
+
 	public bool shieldBar;
 	public bool mobile;
 
@@ -20,11 +21,11 @@ public class HealthBar : MonoBehaviour {
 	{
 		initialLocalPosition = transform.localPosition;
 		initialScaleX = transform.localScale.x;
+		source = transform.parent.GetComponent<HealthBar>();
 	}
 
 	void Update ()
 	{
-
 		if (mobile)
 		{
 			transform.rotation = Quaternion.identity;
@@ -37,6 +38,7 @@ public class HealthBar : MonoBehaviour {
 		}
 		else
 		{
+			
 			transform.localScale = new Vector3(source.getHealth() / source.maxHealth * initialScaleX, transform.localScale.y, transform.localScale.z);
 		}
 

@@ -2,35 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(HealthBar))]
 [RequireComponent(typeof(Detonator))]
-public class BombController : HealthBarObject
+public class BombController : PhysCircle
 {
 	public float fallSpeed;
 
-	[HideInInspector]
-	public Rigidbody2D rb;
+	//[HideInInspector]
+	///public Rigidbody2D rb;
 
 	private Detonator detonator;
 
 	private float gravity;
 
-	protected override void Start()
+	protected override void Awake()
 	{
-		base.Start();
+		base.Awake();
+		rb = GetComponent<Rigidbody2D>();
+		detonator = GetComponent<Detonator>();
 		gravity = rb.gravityScale;
 	}
 
-	protected void Awake()
-	{
-		rb = GetComponent<Rigidbody2D>();
-		detonator = GetComponent<Detonator>();
-	}
 
 	void FixedUpdate()
 	{
 
-		//This ensures the ball will always accellerate or decellerate toward
+		//This ensures the ball will always accelerate or decelerate toward
 		//a certain fixed fall speed via velocity damping
 		if(rb.velocity.y < -fallSpeed)
 		{
@@ -42,7 +39,7 @@ public class BombController : HealthBarObject
 		}
 	}
 
-	public override void die()
+	public void onHealthDeplete()
 	{
 		detonator.sparked = true;
 	}
