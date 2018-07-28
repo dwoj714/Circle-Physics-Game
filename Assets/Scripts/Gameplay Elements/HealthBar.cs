@@ -51,6 +51,8 @@ public class HealthBar : MonoBehaviour {
 	public void takeDamage(float dmg)
 	{
 
+		Debug.Log(name + " Damage Taken: " + dmg);
+
 		if (shield > 0)
 		{
 			counter = 0;

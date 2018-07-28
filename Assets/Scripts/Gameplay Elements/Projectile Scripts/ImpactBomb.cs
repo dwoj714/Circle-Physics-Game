@@ -2,18 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Detonator))]
-public class ImpactBomb : Projectile
+public class ImpactBomb : ExplosiveProjectile
 {
-	[HideInInspector]
-	public Detonator detonator;
-
-	protected override void Awake()
-	{
-		base.Awake();
-		detonator = GetComponent<Detonator>();
-	}
-
 	//On collision, deal impact damage and spark the detonator
 	protected override void OnCollisionEnter2D(Collision2D collision)
 	{

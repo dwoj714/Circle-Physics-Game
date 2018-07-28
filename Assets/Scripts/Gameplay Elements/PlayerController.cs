@@ -5,10 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(ProjectileHandler))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : PhysCircle
 {
-	Rigidbody2D rb;
-	CircleCollider2D col;
 
 	//The largest allowed mouse drag length.
 	//Used to calculate what percentage of power to shoot/move with
@@ -25,15 +23,24 @@ public class PlayerController : MonoBehaviour
 
 	ProjectileHandler weapon;
 
-	protected void Start ()
+	protected override void Awake ()
 	{
-		rb = GetComponent<Rigidbody2D>();
-		col = GetComponent<CircleCollider2D>();
+		base.Awake();
 		weapon = GetComponent<ProjectileHandler>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
+	{
+		handleMouseInput();
+
+		if (weapon.loaded)
+		{
+			weapon.aim(mouseDrag1, mouseDrag1.magnitude / maxMagnitude);
+		}
+	}
+
+	void handleMouseInput()
 	{
 		if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
 		{
@@ -52,6 +59,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetMouseButtonDown(1))
 		{
 			mouseHolder1 = Input.mousePosition;
+			weapon.ready();
 		}
 
 		//Retrieve the position of the mouse while dragging, draw a ray showing the drag
@@ -63,7 +71,8 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetMouseButton(1))
 		{
 			mouseDrag1 = Vector2.ClampMagnitude(((Vector2)Input.mousePosition - mouseHolder1) / -5, maxMagnitude);
-			Debug.DrawRay(transform.position, mouseDrag1, Color.red);
+			Debug.DrawRay((Vector2)transform.position, mouseDrag1, Color.red);
+			Debug.DrawRay((Vector2)transform.position, mouseDrag1 + rb.velocity / 5, Color.magenta);
 		}
 
 		//On mouse release, move the player or fire projectiles
@@ -75,7 +84,8 @@ public class PlayerController : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(1))
 		{
-			weapon.fire(mouseDrag1, mouseDrag1.magnitude / maxMagnitude);
+			//Debug.Log(mouseDrag1 + "\n" + mouseDrag1.magnitude / maxMagnitude);
+			weapon.fire();
 			mouseDrag1 = Vector2.zero;
 		}
 	}

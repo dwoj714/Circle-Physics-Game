@@ -9,7 +9,7 @@ public class BombController : PhysCircle
 	public float fallSpeed;
 
 	//[HideInInspector]
-	///public Rigidbody2D rb;
+	//public Rigidbody2D rb;
 
 	private Detonator detonator;
 
@@ -24,12 +24,13 @@ public class BombController : PhysCircle
 	}
 
 
-	void FixedUpdate()
+	protected override void FixedUpdate()
 	{
-
+		base.FixedUpdate();
+		
 		//This ensures the ball will always accelerate or decelerate toward
 		//a certain fixed fall speed via velocity damping
-		if(rb.velocity.y < -fallSpeed)
+		if(rb.velocity.y < -fallSpeed || (fallSpeed < 0 && rb.velocity.y > -fallSpeed ))
 		{
 			rb.gravityScale = 0;
 		}

@@ -29,21 +29,24 @@ public class Projectile : PhysCircle
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-	protected virtual void FixedUpdate()
+	protected override void FixedUpdate()
 	{
+		base.FixedUpdate();
 		if (hasFixedSpeed)
 			rb.velocity = rb.velocity.normalized * speed;
 	}
 
 	protected override void OnCollisionEnter2D(Collision2D collision)
 	{
-		HealthBar target = collision.collider.GetComponent<HealthBar>();
+		base.OnCollisionEnter2D(collision);
+
+		/*HealthBar target = collision.collider.GetComponent<HealthBar>();
 		if (target)
 		{
 			target.takeDamage(impactDMG);
-		}
+		}*/
 
-		GameObject.Destroy(this.gameObject);
+		//GameObject.Destroy(this.gameObject);
 	}
 
 	/*You were using these to have the projectile start at the center of the player as a trigger and smoothly move out

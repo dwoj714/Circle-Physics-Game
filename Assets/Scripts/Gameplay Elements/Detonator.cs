@@ -75,14 +75,13 @@ public class Detonator : MonoBehaviour {
 					float dst = Mathf.Clamp(cd.distance, 0, Mathf.Infinity);
 
 					//Tbh, don't remember what exact purpose this had for explosion force/damage calculations
-					float adjustedRadius = explosionRadius - circle.radius();
+					float adjustedRadius = explosionRadius - circle.adjustedRadius();
 
 					//Add forces to colliders with rigidbodies
 					if (hitRb)
 					{
 						pushForce = (adjustedRadius - dst) / adjustedRadius * (forceRange) + minPushForce;
 						hitRb.AddForce(cd.normal * pushForce * (cd.distance < 0 ? 1 : -1), ForceMode2D.Impulse);
-						Debug.Log(pushForce);
 					}
 
 					//deal damage to colliders attached to HealthBars

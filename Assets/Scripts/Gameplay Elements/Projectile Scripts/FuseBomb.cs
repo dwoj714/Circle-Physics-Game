@@ -3,20 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Detonator))]
-public class FuseBomb : Projectile {
-
-	[HideInInspector]
-	public Detonator detonator;
-
-	protected override void Awake()
-	{
-		base.Awake();
-		detonator = GetComponent<Detonator>();
-	}
+public class FuseBomb : ExplosiveProjectile {
 
 	protected void Start()
 	{
-		//base.Start();
 		detonator.sparked = true;
 	}
 

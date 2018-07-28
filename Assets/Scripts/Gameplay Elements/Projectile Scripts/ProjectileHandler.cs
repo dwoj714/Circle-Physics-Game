@@ -4,34 +4,74 @@ using UnityEngine;
 
 public class ProjectileHandler : MonoBehaviour
 {
-	CircleCollider2D col;
 
-	public Projectile ammoType;
+
+	public Projectile ammoDefault;
+
+	//The amount of movement given when aiming the loaded projectile
+	public float aimRadius = 1;
+
+	[HideInInspector]
+	public Vector2 direction;
+
+	[HideInInspector]
+	public float power;
+
+	[HideInInspector]
+	public bool loaded;
+
+	PhysCircle circle;
+
+	Projectile shot;
 
 	//If the magnitude of direction is less than this, don't fire
 	public float deadZone = .05f;
 
 	void Start()
 	{
-		col = GetComponent<CircleCollider2D>();
+		circle = GetComponent<PhysCircle>();
 	}
 
-	public void fire(Vector2 direction, float power)
+	//instantiate a projectile, hold it at the center of the player
+	public void ready(Projectile ammoType)
 	{
-		direction.Normalize();
-
-		if(power >= deadZone)
-		{
-			float speedRange = ammoType.maxSpeed - ammoType.minSpeed;
-			float speed = ammoType.minSpeed + speedRange * power;
-
-			Projectile projectile = GameObject.Instantiate(ammoType, transform.position, Quaternion.identity);
-
-			projectile.rb.velocity = direction * speed;
-			projectile.speed = speed;
-
-		}
+		shot = GameObject.Instantiate(ammoType, transform.position, Quaternion.identity);
+		shot.enabled = false;
+		shot.rb.isKinematic = true;
+		loaded = true;
 	}
+
+	public void ready()
+	{
+		ready(ammoDefault);
+	}
+
+	public void aim(Vector2 direction, float power)
+	{
+		this.direction = direction.normalized;
+		this.power = power;
+
+		shot.transform.position = ((Vector2)transform.position + direction.normalized * power * -aimRadius);
+	}
+
+	public void fire()
+	{
+		if (power >= deadZone)
+		{
+			shot.rb.isKinematic = false;
+
+			float speedRange = shot.maxSpeed - shot.minSpeed;
+			shot.speed = shot.minSpeed + speedRange * power;
+			shot.rb.velocity = direction * shot.speed + circle.rb.velocity;
+			shot.enabled = true;
+		}
+		else
+		{
+			GameObject.Destroy(shot.gameObject);
+		}
+		loaded = false;
+	}
+
 }
 
 /*
