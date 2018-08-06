@@ -9,6 +9,8 @@ public class HealthBarVisualizer : MonoBehaviour {
 	public bool shieldBar;
 	public bool mobile;
 
+	PhysCircle parentCircle;
+
 	float initialScaleX;
 
 	//Ok so you needed this to avoid adding localPosition directly from the transform
@@ -22,6 +24,7 @@ public class HealthBarVisualizer : MonoBehaviour {
 		initialLocalPosition = transform.localPosition;
 		initialScaleX = transform.localScale.x;
 		source = transform.parent.GetComponent<HealthBar>();
+		parentCircle = transform.parent.GetComponent<PhysCircle>();
 	}
 
 	void Update ()
@@ -38,10 +41,7 @@ public class HealthBarVisualizer : MonoBehaviour {
 		}
 		else
 		{
-			
 			transform.localScale = new Vector3(source.getHealth() / source.maxHealth * initialScaleX, transform.localScale.y, transform.localScale.z);
 		}
-
-		//Debug.Log(bomb.health / bomb.startingHealth);
 	}
 }

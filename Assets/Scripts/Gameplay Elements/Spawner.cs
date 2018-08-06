@@ -6,21 +6,14 @@ public class Spawner : MonoBehaviour {
 
 	public float frequency;
 
-	private float clock;
-	private float range;
+    public List<BombController> bombList;
 
-	public Transform Bomb;
+    private float clock;
 
 	public Vector2 initialVelocity;
 
-	// Use this for initialization
-	void Start ()
-	{
-		range = transform.localScale.x - Bomb.GetComponent<CircleCollider2D>().radius;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    // Update is called once per frame
+    void FixedUpdate () {
 
 		clock -= Time.deltaTime;
 
@@ -29,18 +22,40 @@ public class Spawner : MonoBehaviour {
 			onClockTimeout();
 			clock = frequency;
 		}
-
 	}
 
 	void onClockTimeout()
 	{
 		Vector3 pos = transform.position;
 
-		pos.x = transform.position.x + (Random.value -0.5f) * range;
+		pos.x = transform.position.x + (Random.value -0.5f) * transform.localScale.x;
 
-		BombController newBomb = Instantiate(Bomb, pos, Quaternion.identity).GetComponent<BombController>();
+		BombController newBomb = Instantiate(getRandomBomb(), pos, Quaternion.identity).GetComponent<BombController>();
 
 		newBomb.rb.velocity = initialVelocity;
 	}
 
+	BombController getRandomBomb()
+	{
+		float total = 0;
+
+		//Calculate the total of the chance variables associated with each bomb type in the list
+		foreach(BombController bomb in bombList)
+		{
+			total += bomb.spawnChance;
+		}
+
+		//Generate a random number between 0 and the total
+		float selection = Random.value * total;
+		total = 0;
+
+		//Iterate through the list of bomb
+		foreach (BombController bomb in bombList)
+		{
+			total += bomb.spawnChance;
+			if (total > selection)
+				return bomb;
+		}
+		return null;
+	}
 }

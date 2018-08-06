@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1656388643362838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.797109, y: 24.136703, z: 0.10058594}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minPushForce: 10
-  maxPushForce: 30
+  maxPushForce: 60
   minExplosionDMG: 40
   maxExplosionDMG: 80
   explosionRadius: 2
@@ -108,14 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275fabfa7bb21ab4dbe63ea647a87245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgMultiplier: 30
   col: {fileID: 0}
   rb: {fileID: 0}
+  oldVelocity: {x: 0, y: 0}
   hasFixedSpeed: 0
   speed: 0
   minSpeed: 2
-  maxSpeed: 30
-  impactDMG: 30
+  maxSpeed: 24
   owner: {fileID: 0}
   detonator: {fileID: 0}
 --- !u!212 &212908715996462240

@@ -23,16 +23,17 @@ public class PlayerController : PhysCircle
 
 	ProjectileHandler weapon;
 
-	protected override void Awake ()
+	protected override void Awake()
 	{
 		base.Awake();
 		weapon = GetComponent<ProjectileHandler>();
 	}
-	
+
 	// Update is called once per frame
-	void Update ()
+	void Update()
 	{
-		handleMouseInput();
+		handleMouseDrag();
+		handleWeaponSelection();
 
 		if (weapon.loaded)
 		{
@@ -40,7 +41,7 @@ public class PlayerController : PhysCircle
 		}
 	}
 
-	void handleMouseInput()
+	void handleMouseDrag()
 	{
 		if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
 		{
@@ -89,4 +90,58 @@ public class PlayerController : PhysCircle
 			mouseDrag1 = Vector2.zero;
 		}
 	}
+
+	//Have this interface with the projectileManager to select what projectile to fire from the list of projectiles
+	void handleWeaponSelection()
+	{
+		float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+		if (scroll > 0)
+		{
+			weapon.selectNext();
+		}
+		if (scroll < 0)
+		{
+			weapon.selectPrevious();
+		}
+
+		//ugh...
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			weapon.select(0);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			weapon.select(1);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			weapon.select(2);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			weapon.select(3);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			weapon.select(4);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha6))
+		{
+			weapon.select(5);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha7))
+		{
+			weapon.select(6);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha8))
+		{
+			weapon.select(7);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha9))
+		{
+			weapon.select(8);
+		}
+	}
 }
+

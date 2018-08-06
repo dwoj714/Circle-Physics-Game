@@ -91,14 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a987fa5d80032a141b60430bfb807704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgMultiplier: 1
   col: {fileID: 0}
   rb: {fileID: 0}
+  oldVelocity: {x: 0, y: 0}
   hasFixedSpeed: 1
   speed: 0
   minSpeed: 5
   maxSpeed: 25
-  impactDMG: 10
   owner: {fileID: 0}
   detonator: {fileID: 0}
 --- !u!114 &114402580505332926
@@ -112,8 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec7eb8051548794a8b393e92a2d71b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPushForce: 5
-  maxPushForce: 60
+  minPushForce: 0
+  maxPushForce: 45
   minExplosionDMG: 10
   maxExplosionDMG: 50
   explosionRadius: 2.5

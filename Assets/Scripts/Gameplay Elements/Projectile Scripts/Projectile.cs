@@ -17,8 +17,6 @@ public class Projectile : PhysCircle
 	public float minSpeed;
 	public float maxSpeed;
 
-	public float impactDMG;
-
 	[HideInInspector]
 	//The GameObject that fired the projectile
 	public GameObject owner;
@@ -35,35 +33,4 @@ public class Projectile : PhysCircle
 		if (hasFixedSpeed)
 			rb.velocity = rb.velocity.normalized * speed;
 	}
-
-	protected override void OnCollisionEnter2D(Collision2D collision)
-	{
-		base.OnCollisionEnter2D(collision);
-
-		/*HealthBar target = collision.collider.GetComponent<HealthBar>();
-		if (target)
-		{
-			target.takeDamage(impactDMG);
-		}*/
-
-		//GameObject.Destroy(this.gameObject);
-	}
-
-	/*You were using these to have the projectile start at the center of the player as a trigger and smoothly move out
-	void OnTriggerExit2D(Collider2D col)
-	{
-		//Debug.Log(col.gameObject.name);
-		if (col.gameObject == owner)
-		{
-			this.col.isTrigger = false;
-		}
-	}
-
-	void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col != owner)
-		{
-			this.col.isTrigger = false;
-		}
-	}*/
 }

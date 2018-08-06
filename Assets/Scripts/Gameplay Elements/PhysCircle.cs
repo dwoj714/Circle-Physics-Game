@@ -73,9 +73,6 @@ public class PhysCircle : MonoBehaviour {
 				//The objects' combined masses times their combined VPMs
 				float baseDamage = massTotal * collisionVPM;
 
-				if (name.Equals("Player"))
-					Debug.Log("Player Collision VPM: " + collisionVPM + "\nCollision Base Damage: " + baseDamage);
-
 				//Deal damage to any existing health bars
 				if (hb)
 				{
@@ -96,7 +93,6 @@ public class PhysCircle : MonoBehaviour {
 
 				Vector2 normal = points[0].normal;
 				float VPM = oldVelocity.magnitude * Mathf.Cos(Mathf.Deg2Rad * Vector2.Angle(normal, oldVelocity));
-				Debug.Log(name + oldVelocity + normal + " Terrain VPM: " + VPM);
 
 				float baseDamage = Mathf.Abs(VPM) * rb.mass;
 

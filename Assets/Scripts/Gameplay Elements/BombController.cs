@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Detonator))]
 public class BombController : PhysCircle
 {
+	public float spawnChance;
+
 	public float fallSpeed;
 
 	//[HideInInspector]
