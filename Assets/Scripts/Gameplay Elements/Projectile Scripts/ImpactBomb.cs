@@ -9,6 +9,7 @@ public class ImpactBomb : ExplosiveProjectile
 	{
 		base.OnCollisionEnter2D(hit);
 		detonator.sparked = true;
+		rb.drag *= 1.5f;
 	}
 
 	void OnExplosion()

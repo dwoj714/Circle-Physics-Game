@@ -6,11 +6,15 @@ public class Spawner : MonoBehaviour {
 
 	public float frequency;
 
-    public List<BombController> bombList;
-
-    private float clock;
+	DropPool pool;
+    float clock;
 
 	public Vector2 initialVelocity;
+
+	void Start()
+	{
+		pool = GetComponent<DropPool>();
+	}
 
     // Update is called once per frame
     void FixedUpdate () {
@@ -26,16 +30,17 @@ public class Spawner : MonoBehaviour {
 
 	void onClockTimeout()
 	{
+
 		Vector3 pos = transform.position;
 
 		pos.x = transform.position.x + (Random.value -0.5f) * transform.localScale.x;
 
-		BombController newBomb = Instantiate(getRandomBomb(), pos, Quaternion.identity).GetComponent<BombController>();
+		PhysCircle newCircle = Instantiate(pool.getCircle(), pos, Quaternion.identity);
 
-		newBomb.rb.velocity = initialVelocity;
+		newCircle.rb.velocity = initialVelocity;
 	}
 
-	BombController getRandomBomb()
+	/*BombController getRandomBomb()
 	{
 		float total = 0;
 
@@ -56,6 +61,7 @@ public class Spawner : MonoBehaviour {
 			if (total > selection)
 				return bomb;
 		}
+		Debug.Log("Returning null... This shouldn't happen.");
 		return null;
-	}
+	}*/
 }

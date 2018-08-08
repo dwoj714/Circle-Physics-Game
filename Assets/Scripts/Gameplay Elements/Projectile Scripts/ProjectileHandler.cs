@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileHandler : MonoBehaviour
+public class ProjectileHandler : MonoBehaviour	//, Buffable
 {
 	//The list of projectiles available to the handler
 	public List<Projectile> projectiles = new List<Projectile>();
@@ -24,8 +24,11 @@ public class ProjectileHandler : MonoBehaviour
 	[HideInInspector]
 	public bool loaded;
 
+	//The PhysCirlce in control of this ProjectileHandler
 	PhysCircle circle;
 
+	//Reference to the loaded projectile
+	//Replace this with an AmmoType, whenever that's implemented...
 	Projectile shot;
 
 	[HideInInspector]
@@ -35,26 +38,43 @@ public class ProjectileHandler : MonoBehaviour
 	//If the magnitude of direction is less than this, don't fire
 	public float deadZone = .05f;
 
+	[HideInInspector]
+	public float energy;
+	public float maxEnergy = 100;
+	public float rechargeSpeed = 20;
+
 	void Start()
 	{
 		circle = GetComponent<PhysCircle>();
+		energy = maxEnergy;
 	}
 
 	void Update()
 	{
 		swapped = swapHolder;
 		swapHolder = false;
+
+		if(energy < maxEnergy)
+		{
+			energy += rechargeSpeed * Time.deltaTime;
+		}
+		else if(energy > maxEnergy)
+		{
+			energy = maxEnergy;
+		}
 	}
 
 	//instantiate a projectile, hold it at the center of the player
 	public void ready(Projectile ammoType)
 	{
-		if (!loaded)
+		if (!loaded && ammoType.energyCost <= energy)
 		{
 			shot = GameObject.Instantiate(ammoType, transform.position, Quaternion.identity);
 			shot.enabled = false;
 			shot.rb.isKinematic = true;
 			loaded = true;
+
+			energy -= shot.energyCost;
 		}
 	}
 
@@ -131,5 +151,7 @@ public class ProjectileHandler : MonoBehaviour
 	{
 		return projectiles[projectileSelection];
 	}
+
+	//public void addBuff(item)
 
 }

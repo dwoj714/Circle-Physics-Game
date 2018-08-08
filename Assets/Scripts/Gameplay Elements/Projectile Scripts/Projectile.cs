@@ -21,6 +21,8 @@ public class Projectile : PhysCircle
 	//The GameObject that fired the projectile
 	public GameObject owner;
 
+	public float energyCost = 10;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -33,4 +35,5 @@ public class Projectile : PhysCircle
 		if (hasFixedSpeed)
 			rb.velocity = rb.velocity.normalized * speed;
 	}
+
 }

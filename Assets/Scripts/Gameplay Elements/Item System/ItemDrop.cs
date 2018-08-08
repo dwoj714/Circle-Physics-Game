@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour {
 
+
+
 	public List<Item> dropList = new List<Item>();
+
+
+
 }

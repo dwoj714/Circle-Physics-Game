@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : PhysCircle
+public interface Buffable
 {
-
+	void addBuff(Item item);
+	void removeBuff(Item item);
 }
