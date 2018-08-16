@@ -6,7 +6,7 @@ public class ItemDrop : MonoBehaviour {
 
 
 
-	public List<Item> dropList = new List<Item>();
+	public List<StatusEffect> dropList = new List<StatusEffect>();
 
 
 

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114499641992683366}
   - component: {fileID: 50290001158138604}
   - component: {fileID: 212818452823058316}
+  - component: {fileID: 114832603601757086}
   m_Layer: 0
   m_Name: Heavy Bomb
   m_TagString: Untagged
@@ -125,7 +126,6 @@ MonoBehaviour:
   col: {fileID: 0}
   rb: {fileID: 0}
   oldVelocity: {x: 0, y: 0}
-  spawnChance: 2
   fallSpeed: 1.5
 --- !u!114 &114499641992683366
 MonoBehaviour:
@@ -144,6 +144,7 @@ MonoBehaviour:
   maxExplosionDMG: 150
   explosionRadius: 6.5
   fuse: 1.2
+  explosionEffects: []
   sparked: 0
 --- !u!114 &114505465929830532
 MonoBehaviour:
@@ -156,8 +157,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e45349d72baf447a24785c24e9c3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldBar: 0
   mobile: 1
+  shieldBar: 0
+--- !u!114 &114832603601757086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075267868307200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28601e14e75b0ea47bf146621df4093b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circles:
+  - {fileID: 114269283844824044, guid: fc116758bdcc2fd4786e12611066c549, type: 2}
+  - {fileID: 0}
+  chances:
+  - 1
+  - 1
 --- !u!114 &114888409143970582
 MonoBehaviour:
   m_ObjectHideFlags: 1

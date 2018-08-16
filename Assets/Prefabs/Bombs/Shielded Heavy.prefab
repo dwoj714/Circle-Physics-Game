@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114049740470183710}
   - component: {fileID: 50543587860940802}
   - component: {fileID: 212976858772425478}
+  - component: {fileID: 114167856029337638}
   m_Layer: 0
   m_Name: Shielded Heavy
   m_TagString: Untagged
@@ -159,7 +160,23 @@ MonoBehaviour:
   maxExplosionDMG: 150
   explosionRadius: 6.5
   fuse: 1.2
+  explosionEffects: []
   sparked: 0
+--- !u!114 &114167856029337638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212502376654464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28601e14e75b0ea47bf146621df4093b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circles:
+  - {fileID: 114269283844824044, guid: fc116758bdcc2fd4786e12611066c549, type: 2}
+  chances:
+  - 1
 --- !u!114 &114224469525786588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e45349d72baf447a24785c24e9c3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldBar: 0
   mobile: 1
+  shieldBar: 0
 --- !u!114 &114268070271122438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e45349d72baf447a24785c24e9c3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldBar: 1
   mobile: 1
+  shieldBar: 1
 --- !u!114 &114423330578971878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,7 +232,6 @@ MonoBehaviour:
   col: {fileID: 0}
   rb: {fileID: 0}
   oldVelocity: {x: 0, y: 0}
-  spawnChance: 1
   fallSpeed: 2.75
 --- !u!212 &212520753505555412
 SpriteRenderer:

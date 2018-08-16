@@ -56,7 +56,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.6
-  m_LinearDrag: 0.5
+  m_LinearDrag: 0.75
   m_AngularDrag: 0
   m_GravityScale: 0.6
   m_Material: {fileID: 0}
@@ -72,7 +72,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1656388643362838}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f8405038651e8ce4a8d81a0e4fe3551d, type: 2}
+  m_Material: {fileID: 6200000, guid: 5c77b88ca9a2cbf408a48057a5fd056c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -90,12 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec7eb8051548794a8b393e92a2d71b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPushForce: 10
-  maxPushForce: 60
-  minExplosionDMG: 40
+  minPushForce: 30
+  maxPushForce: 50
+  minExplosionDMG: 50
   maxExplosionDMG: 80
   explosionRadius: 2
-  fuse: 0.08
+  fuse: 0.05
+  explosionEffects: []
   sparked: 0
 --- !u!114 &114596159410252026
 MonoBehaviour:
@@ -116,6 +117,7 @@ MonoBehaviour:
   minSpeed: 2
   maxSpeed: 24
   owner: {fileID: 0}
+  energyCost: 20
   detonator: {fileID: 0}
 --- !u!212 &212908715996462240
 SpriteRenderer:

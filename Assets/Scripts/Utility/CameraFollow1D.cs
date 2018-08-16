@@ -16,13 +16,11 @@ public class CameraFollow1D : MonoBehaviour {
 	float offsetY;
 
 	PlayerController player;
-	Rigidbody2D rb;
-
+	
     // Use this for initialization
     void Awake ()
 	{
 		player = GameObject.Find("Player").GetComponent<PlayerController>();
-		rb = player.GetComponent<Rigidbody2D>();
 		zPosition = transform.position.z;
 	}
 	

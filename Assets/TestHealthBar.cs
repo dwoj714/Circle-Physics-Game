@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Buffable
+public class TestHealthBar : HealthBar
 {
-	void addBuff(Item item);
-	void removeBuff(Item item);
+
 }

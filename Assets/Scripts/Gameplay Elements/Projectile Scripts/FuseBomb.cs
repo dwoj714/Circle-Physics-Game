@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Detonator))]
 public class FuseBomb : ExplosiveProjectile {
 
-	protected void Start()
+	protected virtual void Start()
 	{
 		detonator.sparked = true;
 	}

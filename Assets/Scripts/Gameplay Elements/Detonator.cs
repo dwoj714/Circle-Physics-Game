@@ -7,8 +7,12 @@ public class Detonator : MonoBehaviour {
 	public float minPushForce, maxPushForce;
 	public float minExplosionDMG, maxExplosionDMG;
 	public float explosionRadius;
-
 	public float fuse = .5f;
+
+	//The list of buffs to be applied to explosion targets
+	//Not using an array in case I want to add status effects via a buff
+	public List<Buff> explosionEffects = new List<Buff>();
+
 	float fuseTimer;
 
 	//When this is true, the fuse is shortened via deltaTime
@@ -48,9 +52,10 @@ public class Detonator : MonoBehaviour {
 
 		if (results.Length > 0)
 		{
-			//declare a rigidbody to reference the rigidbodies of the detected colliders
+			//Declare a bunch of things to hold references to things to be affected by the explosion  
 			Rigidbody2D hitRb;
 			HealthBar hitHb;
+			Buffable hitBuff = null;
 
 			float pushForce;
 			float damage;
@@ -58,10 +63,17 @@ public class Detonator : MonoBehaviour {
 			foreach (Collider2D hitCol in results)
 			{
 				//set hitRb to the rigidbody of the current collider, if it exists
-				hitRb = hitCol.gameObject.GetComponent<Rigidbody2D>();
+				hitRb = hitCol.GetComponent<Rigidbody2D>();
 
 				//set hitHB to the HealthBar of the current collider, if it exists
-				hitHb = hitCol.gameObject.GetComponent<HealthBar>();
+				hitHb = hitCol.GetComponent<HealthBar>();
+
+				//set hitBuff to the Buffable object of the current collider, if there are any to apply
+				///TODO: This will likely need to be reworked later on, as many GameObjects will likely have more than one Buffable component
+				if (explosionEffects.Count > 0)
+				{
+					hitBuff = hitCol.GetComponent<Buffable>();
+				}
 
 				//The ranges of force/damage that can be applied to explosion targets, max at the edge of the collider, min at the edge of the explosion
 				float forceRange = maxPushForce - minPushForce;
@@ -90,9 +102,19 @@ public class Detonator : MonoBehaviour {
 						damage = (adjustedRadius - dst) / adjustedRadius * (dmgRange) + minExplosionDMG;
 						hitHb.takeDamage(damage);
 					}
+
+					//Add status effects (if any) to retrieved Buffables
+					if (hitBuff)
+					{
+						foreach(StatusEffect effect in explosionEffects)
+						{
+							hitBuff.addStatusEffect(effect);
+						}
+					}
 				}
 			}
 		}
+		Debug.Log("Message sent");
 		SendMessage("OnExplosion");
 	}
 

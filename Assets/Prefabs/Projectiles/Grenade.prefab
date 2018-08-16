@@ -56,10 +56,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1.2
+  m_LinearDrag: 1.5
   m_AngularDrag: 0
   m_GravityScale: 0.6
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0cb77231a430b454fb792ff7ffcc3943, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -96,8 +96,9 @@ MonoBehaviour:
   hasFixedSpeed: 0
   speed: 5
   minSpeed: 2
-  maxSpeed: 15
+  maxSpeed: 25
   owner: {fileID: 0}
+  energyCost: 20
   detonator: {fileID: 114926626379424678}
 --- !u!114 &114926626379424678
 MonoBehaviour:
@@ -110,12 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec7eb8051548794a8b393e92a2d71b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPushForce: 10
+  minPushForce: 15
   maxPushForce: 45
   minExplosionDMG: 20
   maxExplosionDMG: 120
   explosionRadius: 3.75
   fuse: 1.5
+  explosionEffects: []
   sparked: 0
 --- !u!212 &212020546257612464
 SpriteRenderer:

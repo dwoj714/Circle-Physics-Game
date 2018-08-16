@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileHandler : MonoBehaviour	//, Buffable
+public class ProjectileHandler : Buffable
 {
 	//The list of projectiles available to the handler
 	public List<Projectile> projectiles = new List<Projectile>();
@@ -49,7 +49,7 @@ public class ProjectileHandler : MonoBehaviour	//, Buffable
 		energy = maxEnergy;
 	}
 
-	void Update()
+	protected override void Update()
 	{
 		swapped = swapHolder;
 		swapHolder = false;
@@ -62,6 +62,7 @@ public class ProjectileHandler : MonoBehaviour	//, Buffable
 		{
 			energy = maxEnergy;
 		}
+		base.Update();
 	}
 
 	//instantiate a projectile, hold it at the center of the player

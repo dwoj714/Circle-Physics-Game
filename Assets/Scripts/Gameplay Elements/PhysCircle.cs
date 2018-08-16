@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PhysCircle : MonoBehaviour {
+public class PhysCircle : Buffable {
 
 	public static float globalDamageMultiplier = 0.65f;
 

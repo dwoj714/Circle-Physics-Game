@@ -4,16 +4,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(HealthBar))]
 [RequireComponent(typeof(Detonator))]
+[RequireComponent(typeof(DropPool))]
 public class BombController : PhysCircle
 {
 	public float fallSpeed;
 
-	//[HideInInspector]
-	//public Rigidbody2D rb;
+	Detonator detonator;
 
-	private Detonator detonator;
+	public float gravity;
 
-	private float gravity;
+	DropPool loot;
 
 	protected override void Awake()
 	{
@@ -21,8 +21,8 @@ public class BombController : PhysCircle
 		rb = GetComponent<Rigidbody2D>();
 		detonator = GetComponent<Detonator>();
 		gravity = rb.gravityScale;
+		loot = GetComponent<DropPool>();
 	}
-
 
 	protected override void FixedUpdate()
 	{
@@ -47,6 +47,7 @@ public class BombController : PhysCircle
 
 	void OnExplosion()
 	{
-		GameObject.Destroy(this.gameObject);
+		loot.spawnRandom(transform);
+		Destroy(this.gameObject);
 	}
 }

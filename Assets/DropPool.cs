@@ -62,4 +62,16 @@ public class DropPool : MonoBehaviour
 		return null;
 	}
 
+	//Use getCircle to get a random PhysCircle, instantiate a clone of it (If it exists) and return a reference to it
+	public PhysCircle spawnRandom(Transform parent)
+	{
+		PhysCircle newCircle = getCircle();
+
+		if (newCircle)
+		{
+			return Instantiate(newCircle, parent.position, Quaternion.identity);
+		}
+		else return null;
+	}
+
 }
